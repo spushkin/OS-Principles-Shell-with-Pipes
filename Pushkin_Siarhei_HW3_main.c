@@ -157,8 +157,21 @@ int main(int argc, char *argv[]) {
         }
 
         if (getline(&inpBuffer, &bufferSize, stdin) == -1) {
-            printf("\n");
-            break; 
+            if (feof(stdin)) {
+
+                printf("\n");
+                break;
+            } else {
+
+                perror("getline");
+                free(inpBuffer);
+                exit(EXIT_FAILURE);
+            }
+        }
+
+        if (inpBuffer[0] == '\n' || strchr(inpBuffer, '\n') == inpBuffer) {
+            printf("Please, enter your command!\n");
+            continue;
         }
 
         if (strchr(inpBuffer, '|')) {
