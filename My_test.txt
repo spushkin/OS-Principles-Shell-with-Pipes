@@ -1,0 +1,2 @@
+ls -l | grep ".c" | wc -l
+echo "test pipes" | tr " " "\n" | sort
